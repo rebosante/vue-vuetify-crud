@@ -4,7 +4,7 @@
 
         <v-card>
           <v-toolbar flat dark color="cyan">
-            <v-toolbar-title>Sign up</v-toolbar-title>
+            <v-toolbar-title>Login</v-toolbar-title>
           </v-toolbar>
           <div class="pa-3">
             <v-form v-model="valid">
@@ -21,7 +21,7 @@
                 required
               ></v-text-field>
               <div class="error" v-html="error"></div>
-              <v-btn @click="register" dark color="cyan">Register</v-btn>
+              <v-btn @click="login" dark color="cyan">Login</v-btn>
             </v-form>
           </div>
         </v-card>
@@ -32,7 +32,7 @@
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
 export default {
-  name: 'Register',
+  name: 'Login',
   data () {
     return {
       valid: false,
@@ -42,7 +42,7 @@ export default {
     }
   },
   methods: {
-    async register () {
+    async login () {
       this.error = null
       try {
         await AuthenticationService.register({

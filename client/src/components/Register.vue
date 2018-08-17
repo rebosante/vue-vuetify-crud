@@ -18,6 +18,8 @@
                 color="cyan"
                 v-model="password"
                 label="Password"
+                type="password"
+                autocomplete="new-password"
                 required
               ></v-text-field>
               <div class="error" v-html="error"></div>

@@ -8,14 +8,29 @@
       </v-btn>
     </v-toolbar-title>
 
+    <v-btn
+      flat to="songs">
+        Browse
+      </v-btn>
+
     <v-spacer></v-spacer>
 
-    <v-btn flat to="login">
+    <v-btn
+    v-if="!$store.state.isUserLoggedIn"
+    flat to="login">
       Login
     </v-btn>
 
-      <v-btn flat to="register">
+      <v-btn
+      v-if="!$store.state.isUserLoggedIn"
+      flat to="register">
         Sign up
+      </v-btn>
+
+      <v-btn
+      v-if="$store.state.isUserLoggedIn"
+      flat @click="logout">
+        Logout
       </v-btn>
 
     <v-btn icon>
@@ -30,7 +45,16 @@
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  methods: {
+    logout () {
+      this.$store.dispatch('setToken', null)
+      this.$store.dispatch('setUser', null)
+      this.$router.push({
+        name: 'home'
+      })
+    }
+  }
 }
 </script>
 

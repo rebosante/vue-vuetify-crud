@@ -1,24 +1,18 @@
 <template>
   <v-layout>
       <v-flex xs6 offset-xs3>
-        <v-card>
-          <v-toolbar flat dark color="cyan">
-            <v-toolbar-title>Songs</v-toolbar-title>
-          </v-toolbar>
-          <div class="pa-3">
-            
-          </div>
-        </v-card>
+        <panel title="Songs"></panel>
       </v-flex>
     </v-layout>
 </template>
 <script>
+import Panel from '@/components/Panel'
 export default {
-  
+  name: 'Login',
+  components: {
+    Panel
+  }
 }
 </script>
 <style scoped>
-
 </style>
-
-

@@ -1,40 +1,38 @@
 <template>
     <v-layout>
       <v-flex xs6 offset-xs3>
-
-        <v-card>
-          <v-toolbar flat dark color="cyan">
-            <v-toolbar-title>Sign up</v-toolbar-title>
-          </v-toolbar>
-          <div class="pa-3">
-            <v-form v-model="valid">
-              <v-text-field
-                color="cyan"
-                v-model="email"
-                label="E-mail"
-                required
-              ></v-text-field>
-              <v-text-field
-                color="cyan"
-                v-model="password"
-                label="Password"
-                type="password"
-                autocomplete="new-password"
-                required
-              ></v-text-field>
-              <div class="error" v-html="error"></div>
-              <v-btn @click="register" dark color="cyan">Register</v-btn>
-            </v-form>
-          </div>
-        </v-card>
+        <panel title="Register">
+          <v-form v-model="valid">
+            <v-text-field
+              color="cyan"
+              v-model="email"
+              label="E-mail"
+              required
+            ></v-text-field>
+            <v-text-field
+              color="cyan"
+              v-model="password"
+              label="Password"
+              type="password"
+              autocomplete="new-password"
+              required
+            ></v-text-field>
+            <div class="error" v-html="error"></div>
+            <v-btn @click="register" dark color="cyan">Register</v-btn>
+          </v-form>
+        </panel>
       </v-flex>
     </v-layout>
 </template>
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import Panel from '@/components/Panel'
 export default {
   name: 'Register',
+  components: {
+    Panel
+  },
   data () {
     return {
       valid: false,

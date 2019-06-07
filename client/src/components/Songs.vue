@@ -15,7 +15,7 @@
 import Panel from '@/components/Panel'
 import SongsService from '@/services/SongsService'
 export default {
-  name: 'Login',
+  name: 'Songs',
   components: {
     Panel
   },

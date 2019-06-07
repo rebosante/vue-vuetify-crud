@@ -12,6 +12,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 require('./routes')(app)
+// next line is to clear the database
 // sequelize.sync({force: true})
 sequelize.sync()
   .then(() => {

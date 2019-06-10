@@ -3,26 +3,38 @@
     <v-flex xs4>
       <panel title="Song Metadata">
         <v-text-field
+          required
+          :rules="[required]"
           label="Title"
           v-model="song.title"
         />
         <v-text-field
-          label="Aitle"
+          required
+          :rules="[required]"
+          label="Artist"
           v-model="song.artist"
         />
         <v-text-field
+          required
+          :rules="[required]"
           label="Genre"
           v-model="song.genre"
         />
         <v-text-field
+          required
+          :rules="[required]"
           label="Album"
           v-model="song.album"
         />
         <v-text-field
+          required
+          :rules="[required]"
           label="Image"
           v-model="song.albumImageUrl"
         />
         <v-text-field
+          required
+          :rules="[required]"
           label="Youtube"
           v-model="song.youtubeId"
         />
@@ -31,14 +43,26 @@
     <v-flex xs8>
       <panel title="Song Structure" class="ml-4">
         <v-textarea
+          required
+          :rules="[required]"
           label="Lyrics"
           v-model="song.lyrics"
         />
         <v-textarea
+          required
+          :rules="[required]"
           label="Tab"
           v-model="song.tab"
         />
       </panel>
+      <v-alert
+        class="ml-4"
+        v-if="error"
+        :value="true"
+        type="error"
+      >
+        {{ error }}
+      </v-alert>
       <v-btn
         dark
         class="cyan"
@@ -65,13 +89,23 @@ export default {
       youtubeId: null,
       lyrics: null,
       tab: null
-    }
+    },
+    required: (value) => !!value || 'Required.',
+    error: null
   }),
   components: {
     Panel
   },
   methods: {
     async create () {
+      this.error = null
+      const areAllFieldsFilledIn = Object
+        .keys(this.song)
+        .every(key => !!this.song[key])
+      if (!areAllFieldsFilledIn) {
+        this.error = 'Please fill all the required fields'
+        return
+      }
       try {
         await SongsService.post(this.song)
         this.$router.push({

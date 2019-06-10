@@ -19,7 +19,7 @@ module.exports = {
       res.send(song)
     } catch (err) {
       res.status(500).send({
-        error: 'An error has ocurred trying to get song'
+        error: 'An error has ocurred trying to get song information'
       })
     }
   },

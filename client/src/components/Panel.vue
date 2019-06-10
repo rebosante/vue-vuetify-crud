@@ -2,6 +2,9 @@
   <v-card>
     <v-toolbar flat dark color="cyan">
       <v-toolbar-title>{{title}}</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <slot name="action" />
+
     </v-toolbar>
     <div class="pa-3">
       <slot>No content defined...</slot>

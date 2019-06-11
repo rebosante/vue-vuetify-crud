@@ -19,7 +19,7 @@
             <v-layout row>
               <v-flex xs7>
                 <v-card-title primary-title>
-                  <div>
+                  <div class="text-sm-left">
                     <div class="headline">{{ song.title }}</div>
                     <div><span>{{ song.artist }}</span> - <small>{{ song.album }}</small></div>
                     <div>{{ song.genre }}</div>
@@ -28,15 +28,16 @@
               </v-flex>
               <v-flex xs5>
                 <v-img
-                  src="https://placehold.it/100x100"
-                  height="100px"
+                  src="https://placehold.it/150x150"
+                  height="150px"
                   contain
                 ></v-img>
               </v-flex>
             </v-layout>
             <v-divider light></v-divider>
             <v-card-actions>
-              <v-btn flat dark @click="navigateTo({ name: 'song', params: { songId: song.id } })">View Song</v-btn>
+              <v-spacer></v-spacer>
+              <v-btn class="cyan lighten-4" light flat @click="navigateTo({ name: 'song', params: { songId: song.id } })">View Song</v-btn>
             </v-card-actions>
           </v-card>
         </panel>

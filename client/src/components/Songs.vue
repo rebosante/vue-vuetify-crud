@@ -28,7 +28,7 @@
               </v-flex>
               <v-flex xs5>
                 <v-img
-                  src="https://placehold.it/150x150"
+                  :src="song.albumImageUrl"
                   height="150px"
                   contain
                 ></v-img>

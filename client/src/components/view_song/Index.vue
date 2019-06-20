@@ -5,7 +5,7 @@
     </v-flex>
     <v-flex xs8>
       <SongInfo :song="song" />
-      <YouTube :song="song.youtubeId" />
+      <YouTube :video-id="song.youtubeId" />
     </v-flex>
   </v-layout>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <panel title="Song Metadata">
     <v-layout>
-      <v-flex xs8>
+      <v-flex>
         <v-list two-line subheader>
           <v-subheader>General</v-subheader>
           <v-list-tile>
@@ -35,26 +35,36 @@
         <p class="title mt-2">{{ song.album }}</p>
       </v-flex>
     </v-layout>
+    <v-layout>
+      <v-flex xs12 text-xs-center>
+        <v-btn @click="navigateTo({
+          name: 'song-edit',
+          params: {
+            songId: song.id
+          }
+        })">Edit song</v-btn>
+      </v-flex>
+    </v-layout>
   </panel>
 </template>
 
 <script>
-import Panel from '@/components/Panel'
+
 export default {
   name: 'SongMetadata',
-  components: {
-    Panel
-  },
   props: {
     song: {
       type: Object,
       default: () => ({})
     }
 
+  },
+  methods: {
+    navigateTo (route) {
+      this.$router.push(route)
+    }
   }
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -36,12 +36,9 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel'
+
 export default {
   name: 'YouTube',
-  components: {
-    Panel
-  },
   props: {
     videoId: {
       type: String,

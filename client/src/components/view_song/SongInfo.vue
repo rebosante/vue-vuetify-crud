@@ -16,12 +16,9 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel'
+
 export default {
   name: 'SongInfo',
-  components: {
-    Panel
-  },
   props: {
     song: {
       type: Object,

@@ -9,7 +9,7 @@
     </v-toolbar-title>
 
     <v-btn
-      flat to="songs">
+      flat to="/songs">
         Browse
       </v-btn>
 
@@ -17,13 +17,13 @@
 
     <v-btn
     v-if="!$store.state.isUserLoggedIn"
-    flat to="login">
+    flat to="/login">
       Login
     </v-btn>
 
       <v-btn
       v-if="!$store.state.isUserLoggedIn"
-      flat to="register">
+      flat to="/register">
         Sign up
       </v-btn>
 

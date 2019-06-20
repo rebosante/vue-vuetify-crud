@@ -66,9 +66,9 @@
       <v-btn
         dark
         class="cyan"
-        @click="create"
+        @click="save"
       >
-        Create Song
+        Update Song
       </v-btn>
     </v-flex>
   </v-layout>
@@ -78,7 +78,7 @@
 
 import SongsService from '@/services/SongService'
 export default {
-  name: 'CreateSong',
+  name: 'EditSong',
   data: () => ({
     song: {
       title: null,
@@ -93,8 +93,16 @@ export default {
     required: (value) => !!value || 'Required.',
     error: null
   }),
+  async mounted () {
+    try {
+      const songId = this.$store.state.route.params.songId
+      this.song = (await SongsService.show(songId)).data
+    } catch (err) {
+      console.log(err)
+    }
+  },
   methods: {
-    async create () {
+    async save () {
       this.error = null
       const areAllFieldsFilledIn = Object
         .keys(this.song)
@@ -104,12 +112,15 @@ export default {
         return
       }
       try {
-        await SongsService.post(this.song)
+        await SongsService.put(this.song)
         this.$router.push({
-          name: 'songs'
+          name: 'songs',
+          params: {
+            songId: this.song.id
+          }
         })
       } catch (err) {
-        console.log('From CreateSong', err)
+        console.log('From EditSong', err)
       }
     }
   }

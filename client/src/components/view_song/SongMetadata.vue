@@ -37,12 +37,12 @@
     </v-layout>
     <v-layout>
       <v-flex xs12 text-xs-center>
-        <v-btn @click="navigateTo({
+        <v-btn :to="{
           name: 'song-edit',
           params: {
             songId: song.id
           }
-        })">Edit song</v-btn>
+        }">Edit song</v-btn>
       </v-flex>
     </v-layout>
   </panel>
@@ -58,11 +58,6 @@ export default {
       default: () => ({})
     }
 
-  },
-  methods: {
-    navigateTo (route) {
-      this.$router.push(route)
-    }
   }
 }
 </script>

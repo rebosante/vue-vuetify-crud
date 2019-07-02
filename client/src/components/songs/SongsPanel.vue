@@ -4,9 +4,9 @@
       slot="action"
       icon
       class="cyan accent-3"
-      @click="navigateTo({
+      :to="{
         name: 'song-create'
-      })"
+      }"
     >
       <v-icon>add</v-icon>
     </v-btn>
@@ -35,7 +35,7 @@
       <v-divider light></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn class="cyan lighten-4" light flat @click="navigateTo({ name: 'song', params: { songId: song.id } })">View Song</v-btn>
+        <v-btn class="cyan lighten-4" light flat :to="{ name: 'song', params: { songId: song.id } }">View Song</v-btn>
       </v-card-actions>
     </v-card>
   </panel>
@@ -52,9 +52,12 @@ export default {
   async mounted () {
     this.songs = (await SongsService.index()).data
   },
-  methods: {
-    navigateTo (route) {
-      this.$router.push(route)
+  watch: {
+    '$route.query.search': {
+      immediate: true,
+      async handler (value) {
+        this.songs = (await SongsService.index(value)).data
+      }
     }
   }
 }

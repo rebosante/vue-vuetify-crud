@@ -17,7 +17,7 @@ module.exports = {
           break
         case 'password':
           res.status(400).send({
-            error: `The password failed to match these rules: <br> 1. it must contain xx chars <br> 2. it must be at least 8 chars` + value
+            error: `The password failed to match these rules: <br> 1. it must contain xx chars <br> 2. it must be at least 8 chars`
           })
           break
         default:

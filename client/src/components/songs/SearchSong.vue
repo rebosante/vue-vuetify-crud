@@ -10,14 +10,14 @@
 </template>
 
 <script>
-
+import _ from 'lodash'
 export default {
   name: 'SearchSong',
   data: () => ({
     search: ''
   }),
   watch: {
-    search (value) {
+    search: _.debounce(async function (value) {
       const route = {
         name: 'songs'
       }
@@ -27,9 +27,9 @@ export default {
         }
       }
       this.$router.push(route)
-    },
+    }, 700),
     '$route.query.search': {
-      inmediate: true,
+      immediate: true,
       handler (value) {
         this.search = value
       }

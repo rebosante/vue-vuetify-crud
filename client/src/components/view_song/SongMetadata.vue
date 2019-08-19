@@ -36,20 +36,23 @@
       </v-flex>
     </v-layout>
     <v-layout>
-      <v-flex xs12 text-xs-center>
+      <v-flex xs6 text-xs-center>
         <v-btn :to="{
           name: 'song-edit',
           params: {
             songId: song.id
           }
         }">Edit song</v-btn>
+        <v-btn v-if="isUserLoggedIn && isBookmarked" @click="bookmark">Unbookmark</v-btn>
+        <v-btn v-if="isUserLoggedIn && !isBookmarked" @click="unbookmark">Bookmark</v-btn>
       </v-flex>
     </v-layout>
   </panel>
 </template>
 
 <script>
-
+import {mapState} from 'vuex'
+import BookmarksService from '@/services/BookmarksService'
 export default {
   name: 'SongMetadata',
   props: {
@@ -58,6 +61,51 @@ export default {
       default: () => ({})
     }
 
+  },
+  data: () => ({
+    isBookmarked: false
+  }),
+  computed: {
+    ...mapState([
+      'isUserLoggedIn'
+    ])
+  },
+  async mounted () {
+    if (!this.isUserLoggedIn) {
+      return
+    }
+    try {
+      const bookmark = (await BookmarksService.index({
+        songId: this.song.id,
+        userId: this.$store.state.user.id
+      })).data
+      this.isBookmarked = !!bookmark
+    } catch (err) {
+      console.log('mounted', err)
+    }
+    console.log(this.isBookmarked)
+  },
+  methods: {
+    async bookmark () {
+      try {
+        await BookmarksService.post({
+          songId: this.song.id,
+          userId: this.$store.state.user.id
+        })
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async unbookmark () {
+      try {
+        await BookmarksService.delete({
+          songId: this.song.id,
+          userId: this.$store.state.user.id
+        })
+      } catch (err) {
+        console.log(err)
+      }
+    }
   }
 }
 </script>

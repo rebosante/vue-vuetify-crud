@@ -17,7 +17,7 @@
                 <div class="video-player-container">
                   <iframe
                     id="ytplayer" type="text/html"
-                    :src="'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&origin=http://example.com'"
+                    :src="'https://www.youtube.com/embed/' + videoId + '?autoplay=0&rel=0&origin=http://example.com'"
                     width="560"
                     height="315"
                     frameborder="0"

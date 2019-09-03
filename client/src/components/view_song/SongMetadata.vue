@@ -43,7 +43,6 @@
             songId: song.id
           }
         }">Edit song</v-btn>
-        {{ bookmark }}
         <v-btn v-if="isUserLoggedIn && !bookmark" @click="setAsBookmark">Set as bookmark</v-btn>
         <v-btn v-if="isUserLoggedIn && bookmark" @click="unsetBookmark">Unset bookmark</v-btn>
 
@@ -69,7 +68,8 @@ export default {
   }),
   computed: {
     ...mapState([
-      'isUserLoggedIn'
+      'isUserLoggedIn',
+      'user'
     ])
   },
   watch: {
@@ -80,11 +80,13 @@ export default {
           return
         }
         try {
-          console.log('entranti')
-          this.bookmark = (await BookmarksService.index({
+          const bookmarks = (await BookmarksService.index({
             songId: this.song.id,
-            userId: this.$store.state.user.id
+            userId: this.user.id
           })).data
+          if (bookmarks.length) {
+            this.bookmark = bookmarks[0]
+          }
         } catch (err) {
           console.log('watcher', err)
         }
@@ -97,8 +99,8 @@ export default {
         try {
           this.bookmark = (await BookmarksService.post({
             songId: this.song.id,
-            userId: this.$store.state.user.id
-          })).data
+            userId: this.user.id
+          }))
         } catch (err) {
           console.log(err)
         }

@@ -15,6 +15,8 @@ import SongsService from '@/services/SongService'
 import SongMetadata from '@/components/view_song/SongMetadata'
 import SongInfo from '@/components/view_song/SongInfo'
 import YouTube from '@/components/view_song/YouTube'
+import SongHistoryService from '@/services/SongHistoryService'
+import {mapState} from 'vuex'
 export default {
   name: 'ViewSong',
   components: {
@@ -25,9 +27,21 @@ export default {
   data: () => ({
     song: null
   }),
+  computed: {
+    ...mapState([
+      'isUserLoggedIn',
+      'route'
+    ])
+  },
   async mounted () {
-    const songId = this.$store.state.route.params.songId
+    const songId = this.route.params.songId
     this.song = (await SongsService.show(songId)).data
+
+    if (this.isUserLoggedIn) {
+      SongHistoryService.post({
+        songId: songId
+      })
+    }
   }
 }
 </script>

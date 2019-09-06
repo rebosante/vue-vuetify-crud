@@ -2,6 +2,7 @@
   <panel title="Bookmarks">
     <v-data-table
     :headers="headers"
+    :pagination.sync="pagination"
     :items="bookmarks"
     class="elevation-1"
     >
@@ -30,22 +31,19 @@ export default {
       }
     ],
     pagination: {
-      // sortBy: date,
+      sortBy: 'createdAt',
       descending: true
     },
     bookmarks: []
   }),
   async mounted () {
     if (this.isUserLoggedIn) {
-      this.bookmarks = (await BookmarksService.index({
-        userId: this.user.id
-      })).data
+      this.bookmarks = (await BookmarksService.index()).data
     }
   },
   computed: {
     ...mapState([
-      'isUserLoggedIn',
-      'user'
+      'isUserLoggedIn'
     ])
   }
 }

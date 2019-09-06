@@ -1,30 +1,41 @@
 <template>
   <div>
-    <v-layout>
-      <v-flex mr-2>
-        <SongsBookmarks />
-      </v-flex>
-      <v-flex>
-        <SearchSong />
-      </v-flex>
-    </v-layout>
-    <v-layout mt-4>
-      <v-flex xs6 offset-xs3>
-        <SongsPanel />
-      </v-flex>
-    </v-layout>
+    <v-container grid-list-md text-xs-center>
+      <v-layout row wrap>
+        <v-flex xs12>
+          <SearchSong />
+        </v-flex>
+        <v-flex xs12>
+          <SongsPanel />
+        </v-flex>
+        <v-flex v-if="isUserLoggedIn" xs6>
+          <SongsBookmarks />
+        </v-flex>
+        <v-flex v-if="isUserLoggedIn" xs6>
+          <RecentlyViewedSongs />
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 <script>
 import SongsPanel from '@/components/songs/SongsPanel'
-import SongsBookmarks from '@/components/songs/Songsbookmarks'
+import RecentlyViewedSongs from '@/components/songs/RecentlyViewedSongs'
+import SongsBookmarks from '@/components/songs/SongsBookmarks'
 import SearchSong from '@/components/songs/SearchSong'
+import {mapState} from 'vuex'
 export default {
   name: 'Songs',
   components: {
     SongsPanel,
     SearchSong,
-    SongsBookmarks
+    SongsBookmarks,
+    RecentlyViewedSongs
+  },
+  computed: {
+    ...mapState([
+      'isUserLoggedIn'
+    ])
   }
 }
 </script>

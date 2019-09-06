@@ -68,8 +68,7 @@ export default {
   }),
   computed: {
     ...mapState([
-      'isUserLoggedIn',
-      'user'
+      'isUserLoggedIn'
     ])
   },
   watch: {
@@ -81,8 +80,7 @@ export default {
         }
         try {
           const bookmarks = (await BookmarksService.index({
-            songId: this.song.id,
-            userId: this.user.id
+            songId: this.song.id
           })).data
           if (bookmarks.length) {
             this.bookmark = bookmarks[0]
@@ -98,8 +96,7 @@ export default {
       if (!this.bookmark) {
         try {
           this.bookmark = (await BookmarksService.post({
-            songId: this.song.id,
-            userId: this.user.id
+            songId: this.song.id
           }))
         } catch (err) {
           console.log(err)

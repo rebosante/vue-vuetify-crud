@@ -17,6 +17,7 @@
 
     <v-btn
     v-if="!$store.state.isUserLoggedIn"
+    class="cyan darken-2"
     flat to="/login">
       Login
     </v-btn>
@@ -51,7 +52,7 @@ export default {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
       this.$router.push({
-        name: 'home'
+        name: 'songs'
       })
     }
   }

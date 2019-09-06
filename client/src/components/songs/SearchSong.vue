@@ -1,12 +1,12 @@
 <template>
-  <Panel title="Search songs">
+  <v-flex xs12>
     <v-text-field
       box
       label="Search by song title, artist, album or genre"
       append-icon="search"
       v-model="search"
-    ></v-text-field>
-  </Panel>
+    />
+  </v-flex>
 </template>
 
 <script>
